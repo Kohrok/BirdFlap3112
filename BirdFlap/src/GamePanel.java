@@ -15,18 +15,26 @@ import javax.swing.Timer;
  *
  * @author njh5156
  */
-public class GamePanel {
+public class GamePanel{
     
     ArrayList<Obstacle> Obstacles;
     Timer Tim;
     ImageIcon Background;
     BoardObj mainCharacter;
     
+    
     public GamePanel(){
         Obstacles = new ArrayList();
-        Tim = new Timer();
         Background = new ImageIcon();
         mainCharacter = new BoardObj();
+
+        ActionListener timeTracker = new ActionListener(){
+            public void actionPerformed(ActionEvent evt) {
+                // Action on timer tick goes here
+            }
+        };
+        Tim = new Timer(1000, timeTracker);
+        Tim.start();
     }
     
     public void actionPerformed(ActionEvent e){
@@ -42,6 +50,7 @@ public class GamePanel {
     }
     
     public void addObstacles(){
-        Obstacles.add();
+        Obstacle another = new Obstacle();
+        Obstacles.add(another);
     }
 }
