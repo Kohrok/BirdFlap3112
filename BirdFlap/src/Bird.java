@@ -8,7 +8,7 @@
  *
  * @author nvf5039
  */
-public class Bird {
+public class Bird extends BoardObj{
     
     int ySpeed;
     
