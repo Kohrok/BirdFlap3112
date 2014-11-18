@@ -23,7 +23,8 @@ public class Obstacle extends BoardObj{
         bottom = new Rectangle();
     }
     
-    public Obstacle spawn(){
+    public Obstacle spawn(int height){
+        openHeight = height;
         return this;
     }
 }
