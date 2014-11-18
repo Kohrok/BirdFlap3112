@@ -1,6 +1,7 @@
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.Timer;
@@ -19,13 +20,12 @@ public class GamePanel{
     
     ArrayList<Obstacle> Obstacles;
     Timer Tim;
-    ImageIcon Background;
     BoardObj mainCharacter;
     
     
     public GamePanel(){
         Obstacles = new ArrayList();
-        Background = new ImageIcon();
+
         mainCharacter = new BoardObj();
 
         ActionListener timeTracker = new ActionListener(){
@@ -38,10 +38,6 @@ public class GamePanel{
     }
     
     public void actionPerformed(ActionEvent e){
-        
-    }
-    
-    public void scrollBackground(ImageIcon bg, ArrayList<Obstacle> Obstacles){
         
     }
     
