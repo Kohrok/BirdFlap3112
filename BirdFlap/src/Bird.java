@@ -9,6 +9,22 @@
  * @author nvf5039
  */
 public class Bird {
-    // Typing random stuff here blah blah blah
     
+    int ySpeed;
+    
+    public Bird(){
+        ySpeed = 0;
+    }
+    
+    public boolean checkCollision(){
+        return false;
+    }
+    
+    public void fallAmin(int ySpeed){
+        
+    }
+    
+    public void flapAnim(){
+        
+    }
 }
