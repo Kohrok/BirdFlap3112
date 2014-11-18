@@ -11,7 +11,7 @@ import java.awt.Rectangle;
  *
  * @author njh5156
  */
-public class Obstacle {
+public class Obstacle extends BoardObj{
     
     Rectangle top;
     int openHeight;
