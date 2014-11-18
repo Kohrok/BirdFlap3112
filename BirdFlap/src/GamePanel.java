@@ -17,7 +17,7 @@ import javax.swing.Timer;
  */
 public class GamePanel {
     
-    ArrayList<Obstacles> Obstacles;
+    ArrayList<Obstacle> Obstacles;
     Timer Tim;
     ImageIcon Background;
     BoardObj mainCharacter;
@@ -33,7 +33,7 @@ public class GamePanel {
         
     }
     
-    public void scrollBackground(ImageIcon bg, ArrayList<Obstacles> Obstacles){
+    public void scrollBackground(ImageIcon bg, ArrayList<Obstacle> Obstacles){
         
     }
     
