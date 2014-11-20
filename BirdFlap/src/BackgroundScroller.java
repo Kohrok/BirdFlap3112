@@ -15,14 +15,15 @@ import java.awt.image.BufferedImage;
  */
 public class BackgroundScroller extends Canvas {
     // Two copies of the background image to scroll
-    private Background backOne;
-    private Background backTwo;
- 
+    private Background backOne, backTwo;
     private BufferedImage back;
- 
+
+    private final String BGONE = "daybg";
+    private final String BGTWO = "nightbg";
+    
     public BackgroundScroller() {
-        backOne = new Background();
-        backTwo = new Background(backOne.image.getWidth(), 0);
+        backOne = new Background(BGONE);
+        backTwo = new Background(backOne.getImageWidth(), 0, BGTWO);
  
         setVisible(true);
     }

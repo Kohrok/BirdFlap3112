@@ -14,31 +14,45 @@ import javax.imageio.ImageIO;
  * Derived from base code from http://www.nutt.net/2013/11/25/create-scrolling-background-java/
  */
 public class Background {
-    BufferedImage image;
-    private final String DEFAULTSTRING = "bg.png";
+    BufferedImage image, tempImage;
+    private final String DEFAULTSTRING = "bg";
     private int x;
     private int y;
-    private final int BGSHIFT = 5;      // The number of pixels shifted per tick
+    private final int BGSHIFT = 1;      // The number of pixels shifted per tick
  
     public Background() {
         this(0,0);
     }
  
-    public Background(int x, int y ) {
+    public Background(String fileName) {
+        this(0,0, fileName);
+    }
+    public Background(int x, int y) {
         setX(x);
         setY(y);
         
-        image = loadImage("bg.png");
+        image = loadImage(DEFAULTSTRING);
     }
  
+    public Background (int x, int y, String fileName)
+    {
+        setX(x);
+        setY(y);
+        
+        image = loadImage(fileName);
+    }
     public BufferedImage loadImage(String fileLocation) {
+        
         try{
-            return ImageIO.read( new File(fileLocation + ".png") );
+            tempImage = ImageIO.read( new File(fileLocation + ".png") );
         }
         catch (Exception e) {
-            System.out.println(e);
-            return null;
+            String workingDir = System.getProperty("user.dir");
+            System.out.println("Current working directory : " + workingDir);
+            e.printStackTrace();
         }
+        
+        return tempImage;
     }
     /**
      * Method that draws the image onto the Graphics object passed
@@ -75,9 +89,9 @@ public class Background {
     public int getY() {
         return this.y;
     }
-    /*
+    
     public int getImageWidth() {
         return image.getWidth();
     }
-*/
+
 }
