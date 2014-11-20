@@ -16,7 +16,7 @@ import javax.swing.Timer;
  *
  * @author njh5156
  */
-public class GamePanel{
+public class GamePanel extends JPanel{
     
     ArrayList<Obstacle> Obstacles;
     Timer Tim;
@@ -24,6 +24,7 @@ public class GamePanel{
     
     
     public GamePanel(){
+        setLayout(null);
         Obstacles = new ArrayList();
 
         mainCharacter = new BoardObj();
@@ -35,6 +36,10 @@ public class GamePanel{
         };
         Tim = new Timer(1000, timeTracker);
         Tim.start();
+        
+        JButton b = new JButton("Test");
+        b.setBounds(50,50,50,50);
+       this.add(b);
     }
     
     public void actionPerformed(ActionEvent e){

@@ -29,13 +29,16 @@ public class OuterFrame extends JFrame implements ActionListener{
         
         // Start timer test
         
-        Tim = new Timer(25,this);
+        Tim = new Timer(16,this);
         Tim.addActionListener(this);
         Tim.start();
         System.out.println("Timer started");
         
         
         // End timer test
+        
+        // Adding this line makes the background not appear...
+//        this.add(Shell);
         
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
