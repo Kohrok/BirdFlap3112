@@ -19,7 +19,7 @@ public class BackgroundScroller extends Canvas {
     private BufferedImage back;
 
     private final String BGONE = "daybg";
-    private final String BGTWO = "nightbg";
+    private final String BGTWO = "daybg";
     
     public BackgroundScroller() {
         backOne = new Background(BGONE);
