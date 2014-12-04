@@ -19,8 +19,8 @@ public class Obstacle extends BoardObj{
     static JLabel bottom;
     
     public Obstacle(int height){
-        top = new JLabel(new ImageIcon("../res/toppipe.png"));
-        bottom = new JLabel(new ImageIcon("../res/bottompipe.png"));
+        top = new JLabel(new ImageIcon("res/toppipe.png"));
+        bottom = new JLabel(new ImageIcon("res/bottompipe.png"));
         openHeight = height;
         setBounds();
     }
