@@ -1,3 +1,7 @@
+
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -15,7 +19,16 @@ public class main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        OuterFrame startFrame = new OuterFrame();
+        JFrame frame = new JFrame("Flapping");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        JComponent newContentPane = new Game();
+        newContentPane.setOpaque(true); //content panes must be opaque
+        frame.setContentPane(newContentPane);
+ 
+        //Display the window.
+        frame.pack();
+        frame.setVisible(true);
     }
     
 }
