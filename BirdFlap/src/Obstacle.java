@@ -1,5 +1,6 @@
 
 import java.awt.Rectangle;
+import javax.swing.*;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -13,18 +14,46 @@ import java.awt.Rectangle;
  */
 public class Obstacle extends BoardObj{
     
-    Rectangle top;
-    int openHeight;
-    Rectangle bottom;
+    JLabel top;
+    static int openHeight;
+    JLabel bottom;
     
-    public void Obstacle(){
-        top = new Rectangle();
-        openHeight = 0;
-        bottom = new Rectangle();
+    public Obstacle(int height){
+        top = new JLabel(new ImageIcon("../res/toppipe.png"));
+        bottom = new JLabel(new ImageIcon("../res/bottompipe.png"));
+        openHeight = height;
+        setBounds();
     }
     
-    public Obstacle spawn(int height){
-        openHeight = height;
-        return this;
+    public void setBounds(){
+        switch(openHeight){
+            case 1:x = 10;y = 10;break;
+            case 2:x = 20;y = 10;break;
+            case 3:x = 30;y = 10;break;
+            case 4:x = 40;y = 10;break;
+            case 5:x = 50;y = 10;break;
+            case 6:x = 60;y = 10;break;
+            case 7:x = 70;y = 10;break;
+            case 8:x = 80;y = 10;break;
+            case 9:x = 90;y = 10;break;
+            case 10:x = 100;y = 10;break;
+        }
+        top.setBounds(288,0,52,x);
+        bottom.setBounds(288,512,52,y);
+    }
+    
+    public void moveObstacle(Obstacle current, int speed){
+        int topY = current.top.getY();
+        int bottomY = current.bottom.getY();
+        int topW = current.top.getWidth();
+        int bottomW = current.bottom.getWidth();
+        int topH = current.top.getHeight();
+        int bottomH = current.bottom.getHeight();
+        
+        int nextXtop = current.top.getX() - speed;
+        int nextXbottom = current.bottom.getX() - speed;
+        
+        current.top.setBounds(topY,nextXtop,topW,topH);
+        current.bottom.setBounds(bottomY,nextXbottom,bottomW,bottomH);
     }
 }
