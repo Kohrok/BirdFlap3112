@@ -14,9 +14,9 @@ import javax.swing.*;
  */
 public class Obstacle extends BoardObj{
     
-    JLabel top;
+    static JLabel top;
     static int openHeight;
-    JLabel bottom;
+    static JLabel bottom;
     
     public Obstacle(int height){
         top = new JLabel(new ImageIcon("../res/toppipe.png"));
@@ -42,7 +42,7 @@ public class Obstacle extends BoardObj{
         bottom.setBounds(288,512,52,y);
     }
     
-    public void moveObstacle(Obstacle current, int speed){
+    public static void moveObstacle(Obstacle current, int speed){
         int topY = current.top.getY();
         int bottomY = current.bottom.getY();
         int topW = current.top.getWidth();

@@ -33,6 +33,7 @@ public class GamePanel extends JPanel{
             public void actionPerformed(ActionEvent evt) {
                 int random = (int)Math.floor(Math.random() * 10) + 1;
                 addObstacles(random);
+                Obstacle.moveObstacle(Obstacles.get(0), 5);
             }
         };
         Tim = new Timer(1000, timeTracker);
