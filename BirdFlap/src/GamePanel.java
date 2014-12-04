@@ -31,15 +31,12 @@ public class GamePanel extends JPanel{
 
         ActionListener timeTracker = new ActionListener(){
             public void actionPerformed(ActionEvent evt) {
-                // Action on timer tick goes here
+                int random = (int)Math.floor(Math.random() * 10) + 1;
+                addObstacles(random);
             }
         };
         Tim = new Timer(1000, timeTracker);
         Tim.start();
-        
-        JButton b = new JButton("Test");
-        b.setBounds(50,50,50,50);
-       this.add(b);
     }
     
     public void actionPerformed(ActionEvent e){
@@ -50,8 +47,8 @@ public class GamePanel extends JPanel{
         return Obstacles;
     }
     
-    public void addObstacles(){
-        Obstacle another = new Obstacle();
+    public void addObstacles(int number){
+        Obstacle another = new Obstacle(number);
         Obstacles.add(another);
     }
 }
