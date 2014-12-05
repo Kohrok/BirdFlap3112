@@ -9,6 +9,10 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -17,12 +21,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 import javax.swing.Timer;
 /**
  *
  * @author nvf5039
  */
-public class Game extends JPanel {
+public class Game extends JPanel implements ActionListener, KeyListener{
     
     private final int WIDTH = 288;
     private final int HEIGHT = 512;
@@ -31,10 +36,11 @@ public class Game extends JPanel {
     private final String BIRDPATH = "res/bird.gif";
     
     Timer Tim;
-
-    
-    public Game(){
-        JLabel bg, bird;    
+    JLabel bg, bird;    
+    Bird doge;
+        
+    public Game() {
+        
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
                 
         //Create and set up the layered pane.
@@ -50,14 +56,35 @@ public class Game extends JPanel {
         bg.setBounds(0,0,bg.getIcon().getIconWidth(), bg.getIcon().getIconHeight());
         bird.setBounds(origin.x,origin.y,bird.getIcon().getIconWidth(), bird.getIcon().getIconHeight());
         
-        layeredPane.add(bg, new Integer (-1));
+        doge = new Bird(BIRDPATH);
+        doge.setBounds(0,0,doge.getIcon().getIconWidth(),doge.getIcon().getIconHeight());
         
+        
+        layeredPane.add(bg, new Integer (-1));    
         layeredPane.add(bird, new Integer (0));
- 
-        //Add control pane and layered pane to this JPanel.
-        //add(Box.createRigidArea(new Dimension(0, 10)));
+        layeredPane.add(doge, new Integer (1));
+        
+        Tim = new Timer(200,this);
+        Tim.addActionListener(this);
+        Tim.start();
+
+        System.out.println("Timer started");
+        
+        Action spaceBar = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                doge.flap();
+                System.out.println("Space pressed");
+            }
+        };
+        this.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0),"check");
+        this.getActionMap().put("check", spaceBar);
+       
         add(layeredPane);
 
+    }
+    
+    public Bird getBird (){
+        return doge;
     }
     
     /** Returns an ImageIcon, or null if the path was invalid. */
@@ -69,46 +96,32 @@ public class Game extends JPanel {
             return null;
         }
     }
-    
-    /*
-    public OuterFrame(){
         
-        layeredPane = new JLayeredPane();
-        getContentPane().add(layeredPane);
-        //GamePanel Shell = new GamePanel();
-        
-        
-        bg = new BackgroundScroller();
-        ((Component)bg).setFocusable(true);
-        //getContentPane().add(bg);
-        layeredPane.add(bg, new Integer (-1));
-        
-        JButton j = new JButton("Text");
-       
-        // Shell.add(j);
-        JButton k = new JButton("Second");
-        
-        layeredPane.add(j, new Integer (0));
-        layeredPane.add(k, new Integer (1));
-        
-        layeredPane.setLayer(j,2);
-        
-        // Start timer test
-        
-        Tim = new Timer(16,this);
-        Tim.addActionListener(this);
-        Tim.start();
-        System.out.println("Timer started");
-        
-        
-        // End timer test
-        
-        // Adding this line makes the background not appear...
-//        this.add(Shell);
-        
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setVisible(true);
-        setSize(WIDTH, HEIGHT);
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Object obj = e;
+
+        doge.fall();
+        System.out.println("repainting");
+        bg.repaint();
+
     }
-    */
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        int keyCode = e.getKeyCode();
+        if(keyCode==KeyEvent.VK_SPACE){
+            doge.flap();
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

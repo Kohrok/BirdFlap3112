@@ -1,6 +1,11 @@
 
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.KeyStroke;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -25,10 +30,11 @@ public class main {
         JComponent newContentPane = new Game();
         newContentPane.setOpaque(true); //content panes must be opaque
         frame.setContentPane(newContentPane);
- 
+
         //Display the window.
         frame.pack();
         frame.setVisible(true);
     }
     
 }
+

@@ -12,13 +12,18 @@ import javax.swing.*;
  *
  * @author njh5156
  */
-public class BoardObj extends Rectangle{
+public class BoardObj extends JLabel{
     
-    Point startPos;
+//    Point startPos;
     ImageIcon icon;
     
     public BoardObj(){
-        startPos = new Point(0,0);
+//        startPos = new Point(0,0);
         icon = new ImageIcon();
+    }
+    
+    public BoardObj(String imgPath){
+        icon = new ImageIcon(imgPath);
+        this.setIcon(icon);
     }
 }
