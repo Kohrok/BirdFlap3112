@@ -27,7 +27,7 @@ import javax.swing.Timer;
  *
  * @author nvf5039
  */
-public class Game extends JPanel implements ActionListener, KeyListener{
+public class Game extends JPanel implements ActionListener {
     
     private final int WIDTH = 288;
     private final int HEIGHT = 512;
@@ -54,17 +54,17 @@ public class Game extends JPanel implements ActionListener, KeyListener{
         bird = new JLabel (new ImageIcon(BIRDPATH));
         
         bg.setBounds(0,0,bg.getIcon().getIconWidth(), bg.getIcon().getIconHeight());
-        bird.setBounds(origin.x,origin.y,bird.getIcon().getIconWidth(), bird.getIcon().getIconHeight());
+       // bird.setBounds(origin.x,origin.y,bird.getIcon().getIconWidth(), bird.getIcon().getIconHeight());
         
         doge = new Bird(BIRDPATH);
-        doge.setBounds(0,0,doge.getIcon().getIconWidth(),doge.getIcon().getIconHeight());
+        doge.setBounds(25,origin.y,doge.getIcon().getIconWidth(),doge.getIcon().getIconHeight());
         
         
         layeredPane.add(bg, new Integer (-1));    
         layeredPane.add(bird, new Integer (0));
         layeredPane.add(doge, new Integer (1));
         
-        Tim = new Timer(200,this);
+        Tim = new Timer(25,this);
         Tim.addActionListener(this);
         Tim.start();
 
@@ -100,28 +100,13 @@ public class Game extends JPanel implements ActionListener, KeyListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         Object obj = e;
-
+        if (obj == Tim)
+        {
+            System.out.println("Tim count");
+        }
         doge.fall();
-        System.out.println("repainting");
         bg.repaint();
 
     }
 
-    @Override
-    public void keyTyped(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        int keyCode = e.getKeyCode();
-        if(keyCode==KeyEvent.VK_SPACE){
-            doge.flap();
-        }
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
