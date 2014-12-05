@@ -17,15 +17,32 @@ public class Obstacle extends BoardObj{
     static JLabel top;
     static int openHeight;
     static JLabel bottom;
+   
+    int x,y;
+    
+    public JLabel getTop(){
+        return top;
+    }
+    
+    public JLabel getBottom(){
+        return bottom;
+    }
     
     public Obstacle(int height){
         top = new JLabel(new ImageIcon("res/toppipe.png"));
         bottom = new JLabel(new ImageIcon("res/bottompipe.png"));
         openHeight = height;
-        setBounds();
+        setUp();
     }
     
-    public void setBounds(){
+    public Obstacle(){
+        top = new JLabel(new ImageIcon("res/toppipe.png"));
+        bottom = new JLabel(new ImageIcon("res/bottompipe.png"));
+        openHeight = (int)(Math.random() * 10) + 1;
+        setUp();
+    }
+    
+    public void setUp(){
         switch(openHeight){
             case 1:x = 10;y = 10;break;
             case 2:x = 20;y = 10;break;

@@ -34,11 +34,15 @@ public class Game extends JPanel implements ActionListener {
     private JLayeredPane layeredPane;
     private final String BGPATH = "res/daybg.png";
     private final String BIRDPATH = "res/bird.gif";
+    private final String TPIPEPATH = "res/toppipe.png";
+    private final String BPIPEPATH = "res/bottompipe.png";
     
     Timer Tim;
     JLabel bg, bird;    
     Bird doge;
-        
+    
+    Obstacle pipes;
+    Pipe top, bottom;
     public Game() {
         
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
@@ -51,18 +55,20 @@ public class Game extends JPanel implements ActionListener {
         Point origin = new Point(WIDTH/4 - 17, HEIGHT/2 - 12);
         
         bg = new JLabel(new ImageIcon(BGPATH));
-        bird = new JLabel (new ImageIcon(BIRDPATH));
-        
-        bg.setBounds(0,0,bg.getIcon().getIconWidth(), bg.getIcon().getIconHeight());
-       // bird.setBounds(origin.x,origin.y,bird.getIcon().getIconWidth(), bird.getIcon().getIconHeight());
+        bg.setBounds(0,0,bg.getIcon().getIconWidth(),bg.getIcon().getIconHeight());
         
         doge = new Bird(BIRDPATH);
         doge.setBounds(25,origin.y,doge.getIcon().getIconWidth(),doge.getIcon().getIconHeight());
         
+        top = new Pipe(TPIPEPATH, "top");
+        bottom = new Pipe(BPIPEPATH, "bottom");
+        //pipes = new Obstacle(HEIGHT/2); // Default height is halfway point of the screen
+
+        layeredPane.add(bg, new Integer (-1));      // BG is the lowest layer
+        //layeredPane.add(pipes.getTop(), new Integer(1));
+        //layeredPane.add(pipes.getBottom(), new Integer(1));
         
-        layeredPane.add(bg, new Integer (-1));    
-        layeredPane.add(bird, new Integer (0));
-        layeredPane.add(doge, new Integer (1));
+        layeredPane.add(doge, new Integer (0));     // Bird is the highest layer
         
         Tim = new Timer(25,this);
         Tim.addActionListener(this);
@@ -105,6 +111,7 @@ public class Game extends JPanel implements ActionListener {
             System.out.println("Tim count");
         }
         doge.fall();
+        
         bg.repaint();
 
     }
