@@ -36,6 +36,10 @@ public class Bird extends BoardObj implements ActionListener{
     public int getYPos(){
         return this.getY();
     }
+    public boolean isAlive(){
+        boolean hit = false;
+        return true;
+    }
     
     public void flap(){
  

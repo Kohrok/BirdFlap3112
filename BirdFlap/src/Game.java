@@ -65,9 +65,8 @@ public class Game extends JPanel implements ActionListener {
         //pipes = new Obstacle(HEIGHT/2); // Default height is halfway point of the screen
 
         layeredPane.add(bg, new Integer (-1));      // BG is the lowest layer
-        //layeredPane.add(pipes.getTop(), new Integer(1));
-        //layeredPane.add(pipes.getBottom(), new Integer(1));
-        
+        layeredPane.add(top, new Integer (0));
+        layeredPane.add(bottom, new Integer(0));
         layeredPane.add(doge, new Integer (0));     // Bird is the highest layer
         
         Tim = new Timer(25,this);
@@ -111,7 +110,13 @@ public class Game extends JPanel implements ActionListener {
             System.out.println("Tim count");
         }
         doge.fall();
-        
+        top.move();
+        bottom.move();
+        if (top.checkOffScreen())   // Top and bottom are in parallel
+        {
+           top.reset();
+           bottom.reset();
+        }
         bg.repaint();
 
     }

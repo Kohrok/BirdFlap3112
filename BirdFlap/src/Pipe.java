@@ -15,22 +15,42 @@ import javax.swing.*;
 public class Pipe extends BoardObj{
     
     static int openHeight;
-   
+    int pipeStartX;
+    final int HOLESIZE = 96;    // The size of the gap between pipes
+    final int MINPIPE = 96;     // Minimum Pipe Height
     int x,y;    
       
     public Pipe(String imgPath, String position){
         super(imgPath);
-        openHeight = (int)(Math.random() * 10) + 1;
+        openHeight = (int)(Math.random() * ((512/3) - HOLESIZE)) + MINPIPE;     // Integer Min and the hole
+        
+        pipeStartX = 288 - this.icon.getIconWidth();    // The right edge of the screen
+        x = pipeStartX;
+        
         if (position == "top")
         {
-            this.setBounds(288, 0, this.icon.getIconWidth(), this.icon.getIconHeight());
-            this.setLocation(288,0);
+            y = 0;
+            this.setBounds(pipeStartX, y, this.icon.getIconWidth(), openHeight);
         }
         if (position == "bottom")
         {
-            this.setBounds(288, 512, this.icon.getIconWidth(), this.icon.getIconHeight());
-            this.setLocation(288,0);
+            y = 512-openHeight;
+            this.setBounds(pipeStartX, y, this.icon.getIconWidth(), openHeight);
         }
+    }
+    public void move(){
+        x--;
+        this.setBounds(this.x, this.y, this.icon.getIconWidth(), openHeight);
+    }
+    
+    public void reset(){
+        openHeight = (int)(Math.random() * ((512/3) - HOLESIZE)) + MINPIPE;     // Integer Min and the hole
+        x = 236;
+        this.setBounds(this.x, this.y, this.icon.getIconWidth(), openHeight);
+    }
+    
+    public boolean checkOffScreen(){
+        return (this.x < -52);    // Returns true if offScreen
     }
     /*
     public static void moveObstacle(Obstacle current, int speed){
