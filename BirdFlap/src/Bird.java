@@ -36,7 +36,7 @@ public class Bird extends BoardObj implements ActionListener{
         boolean hit = false;
         return true;
     }
-    
+
     public void flap(){
  
         this.setLocation(this.getX(), this.getY() - BOOST);

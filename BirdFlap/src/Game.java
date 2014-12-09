@@ -72,12 +72,14 @@ public class Game extends JPanel implements ActionListener {
         
         Tim = new Timer(25,this);
         Tim.addActionListener(this);
-        Tim.start();
 
         System.out.println("Timer started");
         
         Action spaceBar = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
+                if(!Tim.isRunning()){
+                    Tim.start();
+                }
                 doge.flap();
                 //System.out.println("Space pressed");
             }
@@ -102,7 +104,12 @@ public class Game extends JPanel implements ActionListener {
             return null;
         }
     }
-        
+    public void resetGame(){
+        Point origin = new Point(WIDTH/4 - 17, HEIGHT/2 - 12);
+        doge.setBounds(25,origin.y,doge.getIcon().getIconWidth(),doge.getIcon().getIconHeight());
+        top.restart();
+        bottom.restart();        
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
         Object obj = e;
@@ -116,9 +123,10 @@ public class Game extends JPanel implements ActionListener {
         
         if(doge.checkCollision(top, bottom))
         {
+            Tim.stop();
             JOptionPane.showMessageDialog(new JFrame(), "Game Over");
-            AAAAAAAAAAA
-                    //This is where we close the game
+            resetGame();
+            //This is where we close the game
         }
         
         if (top.checkOffScreen())   // Top and bottom are in parallel

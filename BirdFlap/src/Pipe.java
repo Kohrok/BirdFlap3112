@@ -16,8 +16,8 @@ public class Pipe extends BoardObj{
     
     static int openHeight;
     int pipeStartX;
-    final int HOLESIZE = 96;    // The size of the gap between pipes
-    final int MINPIPE = 96;     // Minimum Pipe Height
+    final int HOLESIZE = 175;    // The size of the gap between pipes
+    final int MINPIPE = 200;     // Minimum Pipe Height
     int x,y;    
       
     public Pipe(String imgPath, String position){
@@ -44,6 +44,12 @@ public class Pipe extends BoardObj{
     }
     
     public void reset(){
+        openHeight = (int)(Math.random() * ((512/3) - HOLESIZE)) + MINPIPE;     // Integer Min and the hole
+        x = 288;
+        this.setBounds(this.x, this.y, this.icon.getIconWidth(), openHeight);
+    }
+    
+    public void restart(){
         openHeight = (int)(Math.random() * ((512/3) - HOLESIZE)) + MINPIPE;     // Integer Min and the hole
         x = 236;
         this.setBounds(this.x, this.y, this.icon.getIconWidth(), openHeight);
