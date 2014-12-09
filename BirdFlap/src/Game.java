@@ -20,6 +20,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.Timer;
@@ -78,7 +79,7 @@ public class Game extends JPanel implements ActionListener {
         Action spaceBar = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
                 doge.flap();
-                System.out.println("Space pressed");
+                //System.out.println("Space pressed");
             }
         };
         this.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0),"check");
@@ -112,6 +113,14 @@ public class Game extends JPanel implements ActionListener {
         doge.fall();
         top.move();
         bottom.move();
+        
+        if(doge.checkCollision(top, bottom))
+        {
+            JOptionPane.showMessageDialog(new JFrame(), "Game Over");
+            AAAAAAAAAAA
+                    //This is where we close the game
+        }
+        
         if (top.checkOffScreen())   // Top and bottom are in parallel
         {
            top.reset();

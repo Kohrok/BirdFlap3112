@@ -25,10 +25,6 @@ public class Bird extends BoardObj implements ActionListener{
         super(imgPath);
     }
     
-    public boolean checkCollision(){
-        return false;
-    }
-    
     public void fall(){
         this.setLocation(this.getX(), this.getY() + ySpeed);
     }
