@@ -14,45 +14,46 @@ import javax.swing.*;
  */
 public class Pipe extends BoardObj{
     
-    static int openHeight;
+    static int HOLESIZE;
     int pipeStartX;
-    final int HOLESIZE = 175;    // The size of the gap between pipes
-    final int MINPIPE = 200;     // Minimum Pipe Height
+    int openHeight;    // The size of the gap between pipes
+    final int MINPIPE = 242;     // Minimum Pipe Height
     int x,y;    
       
     public Pipe(String imgPath, String position){
         super(imgPath);
-        openHeight = (int)(Math.random() * ((512/3) - HOLESIZE)) + MINPIPE;     // Integer Min and the hole
+        HOLESIZE = (int)(Math.random() * ((512/3)));
+        openHeight = 40;     // Integer Min and the hole
         
         pipeStartX = 288 - this.icon.getIconWidth();    // The right edge of the screen
         x = pipeStartX;
         
         if (position == "top")
         {
-            y = 0;
-            this.setBounds(pipeStartX, y, this.icon.getIconWidth(), openHeight);
+            y = 0-openHeight;
+            this.setBounds(pipeStartX, y, this.icon.getIconWidth(), this.icon.getIconHeight());
         }
         if (position == "bottom")
         {
             y = 512-openHeight;
-            this.setBounds(pipeStartX, y, this.icon.getIconWidth(), openHeight);
+            this.setBounds(pipeStartX, y, this.icon.getIconWidth(), this.icon.getIconHeight());
         }
     }
     public void move(){
-        x--;
-        this.setBounds(this.x, this.y, this.icon.getIconWidth(), openHeight);
+        x-=3;
+        this.setBounds(this.x, this.y, this.icon.getIconWidth(), this.icon.getIconHeight());
     }
     
     public void reset(){
-        openHeight = (int)(Math.random() * ((512/3) - HOLESIZE)) + MINPIPE;     // Integer Min and the hole
+        HOLESIZE = (int)(Math.random() * ((512/3)));     // Integer Min and the hole
         x = 288;
-        this.setBounds(this.x, this.y, this.icon.getIconWidth(), openHeight);
+        this.setBounds(this.x, this.y, this.icon.getIconWidth(), this.icon.getIconHeight());
     }
     
     public void restart(){
         openHeight = (int)(Math.random() * ((512/3) - HOLESIZE)) + MINPIPE;     // Integer Min and the hole
         x = 236;
-        this.setBounds(this.x, this.y, this.icon.getIconWidth(), openHeight);
+        this.setBounds(this.x, this.y, this.icon.getIconWidth(), this.icon.getIconHeight());
     }
     
     public boolean checkOffScreen(){

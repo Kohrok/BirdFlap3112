@@ -15,10 +15,10 @@ import javax.swing.Timer;
  */
 public class Bird extends BoardObj implements ActionListener{
     
-    final int ySpeed = 1;
+    final int ySpeed = 2;
     final int jumpHeight = -1;
     final int xPos = 25;
-    final int BOOST = 40;
+    final int BOOST = 60;
     long time, stop;
     
     public Bird(String imgPath){

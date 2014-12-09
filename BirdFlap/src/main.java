@@ -32,8 +32,10 @@ public class main {
         frame.setContentPane(newContentPane);
 
         //Display the window.
-        frame.pack();
+        frame.setSize(288, 512);
+        //frame.pack();
         frame.setVisible(true);
+        frame.setResizable(false);
     }
     
 }

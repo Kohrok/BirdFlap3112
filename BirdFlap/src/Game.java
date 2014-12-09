@@ -4,8 +4,10 @@
  * and open the template in the editor.
  */
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -39,8 +41,9 @@ public class Game extends JPanel implements ActionListener {
     private final String BPIPEPATH = "res/bottompipe.png";
     
     Timer Tim;
-    JLabel bg, bird;    
+    JLabel bg, bird, scoreLabel;    
     Bird doge;
+    int score;
     
     Obstacle pipes;
     Pipe top, bottom;
@@ -64,11 +67,21 @@ public class Game extends JPanel implements ActionListener {
         top = new Pipe(TPIPEPATH, "top");
         bottom = new Pipe(BPIPEPATH, "bottom");
         //pipes = new Obstacle(HEIGHT/2); // Default height is halfway point of the screen
-
+        
+        score = 0;
+        
+        Font myFont = new Font("SansSerif", Font.BOLD, 24);
+        
+        scoreLabel = new JLabel(""+score);
+        scoreLabel.setBounds(144,25,25,25);
+        scoreLabel.setFont(myFont);
+        scoreLabel.setForeground(Color.WHITE);
+        
         layeredPane.add(bg, new Integer (-1));      // BG is the lowest layer
         layeredPane.add(top, new Integer (0));
         layeredPane.add(bottom, new Integer(0));
         layeredPane.add(doge, new Integer (0));     // Bird is the highest layer
+        layeredPane.add(scoreLabel, new Integer (1));
         
         Tim = new Timer(25,this);
         Tim.addActionListener(this);
@@ -108,7 +121,9 @@ public class Game extends JPanel implements ActionListener {
         Point origin = new Point(WIDTH/4 - 17, HEIGHT/2 - 12);
         doge.setBounds(25,origin.y,doge.getIcon().getIconWidth(),doge.getIcon().getIconHeight());
         top.restart();
-        bottom.restart();        
+        bottom.restart();
+        score = 0;
+        scoreLabel.setText(""+score);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -124,7 +139,7 @@ public class Game extends JPanel implements ActionListener {
         if(doge.checkCollision(top, bottom))
         {
             Tim.stop();
-            JOptionPane.showMessageDialog(new JFrame(), "Game Over");
+            JOptionPane.showMessageDialog(new JFrame(), "Game Over \n SCORE: "+score);
             resetGame();
             //This is where we close the game
         }
@@ -133,9 +148,10 @@ public class Game extends JPanel implements ActionListener {
         {
            top.reset();
            bottom.reset();
+           score++;
+           scoreLabel.setText(""+score);
         }
         bg.repaint();
-
     }
 
 }
