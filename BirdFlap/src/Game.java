@@ -42,7 +42,6 @@ public class Game extends JPanel implements ActionListener {
     JLabel bg, bird;    
     Bird doge;
     
-    Obstacle pipes;
     Pipe top, bottom;
     public Game() {
         
