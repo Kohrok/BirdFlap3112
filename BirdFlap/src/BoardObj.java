@@ -14,11 +14,11 @@ import javax.swing.*;
  */
 public class BoardObj extends JLabel{
     
-//    Point startPos;
+    boolean crash;
     ImageIcon icon;
+    Rectangle r0, r1, r2;
     
     public BoardObj(){
-//        startPos = new Point(0,0);
         icon = new ImageIcon();
     }
     
@@ -28,8 +28,8 @@ public class BoardObj extends JLabel{
     }
     
     public boolean checkCollision(BoardObj b1, BoardObj b2){
-        Rectangle r0, r1, r2;
-        boolean crash = false;
+        
+        crash = false;
         
         r0 = new Rectangle(this.getBounds());
         r1 = new Rectangle(b1.getBounds());

@@ -3,9 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 
 import java.awt.Dimension;
 import java.awt.Font;
@@ -32,18 +30,23 @@ public class Game extends JPanel implements ActionListener {
     
     private final int WIDTH = 288;
     private final int HEIGHT = 512;
-    private JLayeredPane layeredPane;
+
     private final String BGPATH = "res/daybg.png";
     private final String BIRDPATH = "res/bird.gif";
     private final String TPIPEPATH = "res/toppipe.png";
     private final String BPIPEPATH = "res/bottompipe.png";
-    
-    Timer Tim;
-    JLabel bg, bird, scoreLabel;    
+
+    Action spaceBar;
     Bird doge;
+    Font myFont;
     int score;
-    
+    JLabel bg, bird, scoreLabel;    
+    JLayeredPane layeredPane;
+    Object obj;
     Pipe top, bottom;
+    Point origin;
+    Timer Tim;
+    
     public Game() {
         
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
@@ -53,7 +56,7 @@ public class Game extends JPanel implements ActionListener {
         layeredPane.setPreferredSize(new Dimension(WIDTH, HEIGHT));
  
         //This is where the bird is
-        Point origin = new Point(WIDTH/4 - 17, HEIGHT/2 - 12);
+        origin = new Point(WIDTH/4 - 17, HEIGHT/2 - 12);
         
         bg = new JLabel(new ImageIcon(BGPATH));
         bg.setBounds(0,0,bg.getIcon().getIconWidth(),bg.getIcon().getIconHeight());
@@ -63,19 +66,18 @@ public class Game extends JPanel implements ActionListener {
         
         top = new Pipe(TPIPEPATH, "top");
         bottom = new Pipe(BPIPEPATH, "bottom");
-        //pipes = new Obstacle(HEIGHT/2); // Default height is halfway point of the screen
         
         score = 0;
         
-        Font myFont = new Font("SansSerif", Font.BOLD, 24);
+        myFont = new Font("SansSerif", Font.BOLD, 24);
         
         scoreLabel = new JLabel(""+score);
-        scoreLabel.setBounds(144,25,25,25);
+        scoreLabel.setBounds(130,25,50,25);
         scoreLabel.setFont(myFont);
         scoreLabel.setForeground(Color.WHITE);
         
         layeredPane.add(bg, new Integer (-1));      // BG is the lowest layer
-        layeredPane.add(top, new Integer (0));
+        layeredPane.add(top, new Integer (0));      // Pipes and bird are the highest layer
         layeredPane.add(bottom, new Integer(0));
         layeredPane.add(doge, new Integer (0));     // Bird is the highest layer
         layeredPane.add(scoreLabel, new Integer (1));
@@ -85,7 +87,7 @@ public class Game extends JPanel implements ActionListener {
 
         System.out.println("Timer started");
         
-        Action spaceBar = new AbstractAction() {
+        spaceBar = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
                 if(!Tim.isRunning()){
                     Tim.start();
@@ -115,7 +117,7 @@ public class Game extends JPanel implements ActionListener {
         }
     }
     public void resetGame(){
-        Point origin = new Point(WIDTH/4 - 17, HEIGHT/2 - 12);
+        origin = new Point(WIDTH/4 - 17, HEIGHT/2 - 12);
         doge.setBounds(25,origin.y,doge.getIcon().getIconWidth(),doge.getIcon().getIconHeight());
         top.restart();
         bottom.restart();
@@ -124,7 +126,7 @@ public class Game extends JPanel implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        Object obj = e;
+        obj = e;
         if (obj == Tim)
         {
             System.out.println("Tim count");
@@ -136,9 +138,14 @@ public class Game extends JPanel implements ActionListener {
         if(doge.checkCollision(top, bottom))
         {
             Tim.stop();
-            JOptionPane.showMessageDialog(new JFrame(), "Game Over \n SCORE: "+score);
+            JOptionPane.showMessageDialog(new JFrame(), "Crash! \n SCORE: "+score);
             resetGame();
             //This is where we close the game
+        }
+        if(!doge.isAlive()){
+            Tim.stop();
+            JOptionPane.showMessageDialog(new JFrame(), "You fell down! \n SCORE: "+score);
+            resetGame();
         }
         
         if (top.checkOffScreen())   // Top and bottom are in parallel

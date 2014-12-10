@@ -1,86 +1,48 @@
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.Timer;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  *
  * @author nvf5039
  */
-public class Bird extends BoardObj implements ActionListener{
+public class Bird extends BoardObj{
     
-    final int ySpeed = 2;
-    final int jumpHeight = -1;
-    final int xPos = 25;
+    boolean hit;
     final int BOOST = 60;
-    long time, stop;
+    final int JUMPHEIGHT = -1;
+    final int XPOS = 25;
+    final int YSPEED = 2;
     
     public Bird(String imgPath){
         super(imgPath);
     }
     
     public void fall(){
-        this.setLocation(this.getX(), this.getY() + ySpeed);
+        this.setLocation(this.getX(), this.getY() + YSPEED);
     }
-    
+    public void flap(){
+        this.setLocation(this.getX(), this.getY() - BOOST);
+    }
     public int getYPos(){
         return this.getY();
     }
     public boolean isAlive(){
-        boolean hit = false;
-        return true;
-    }
-
-    public void flap(){
- 
-        this.setLocation(this.getX(), this.getY() - BOOST);
-        // Timing still isn't working
-        /*
-        time = System.currentTimeMillis();
-        stop = time + 250;
-        
-        
-        Timer flyTime = new Timer(25, this);
-        flyTime.addActionListener(this);
-        flyTime.start();
-        while (System.currentTimeMillis() < stop)
+        hit = true;
+        System.out.println(this.getY() - HEIGHT);
+        if (this.getY() > 512)    // Bird is out of bounds
         {
-            if (System.currentTimeMillis() > stop)
-            {
-                flyTime.stop();
-            }
+            return false;
         }
-        */
-        
-//        flyTime.stop();
-        /*
-        Timer startFly = new Timer(500, new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                Timer flyTime = new Timer(50, new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        setLocation(xPos, getYPos() + jumpHeight);
-                        System.out.println("Jumping 5");
-
-                    }
-                });
-                
-                flyTime.start();
-            }
-        });
-        
-        startFly.setRepeats(false);
-        startFly.start();
-        */
+        return hit;
     }
+
     
+    /*
     public void actionPerformed(ActionEvent e) {
-        this.setLocation(xPos, getYPos() + jumpHeight);
+        this.setLocation(xPos, getYPos() + JUMPHEIGHT);
         System.out.println("Jumping 5");
     }
+    */
 }
