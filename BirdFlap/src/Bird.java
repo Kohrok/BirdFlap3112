@@ -1,8 +1,3 @@
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-
 /**
  *
  * @author nvf5039
@@ -38,11 +33,4 @@ public class Bird extends BoardObj{
         return hit;
     }
 
-    
-    /*
-    public void actionPerformed(ActionEvent e) {
-        this.setLocation(xPos, getYPos() + JUMPHEIGHT);
-        System.out.println("Jumping 5");
-    }
-    */
 }
